@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoAI Pro - ИИ фотосессии и карточки маркетплейсов</title>
+    <style>
+        :root {
+            --color-bg-primary: #0F0F0F;
+            --color-bg-secondary: #1A1A1A;
+            --color-text-primary: #FFFFFF;
+            --color-text-secondary: #B0B0B0;
+            --color-accent-cyan: #00D9FF;
+            --color-accent-purple: #7C3AED;
+            --color-accent-hover: #7C3AED;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+            z-index: 1000;
+            padding: var(--space-16) var(--space-24);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            margin-left: var(--space-32);
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-24);
+        }
+
+        .portfolio-item {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-preview {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-preview {
+            border-color: var(--color-accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        nav a:hover {
+            color: var(--color-accent-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 60px;
+            padding: 80px var(--space-24);
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(124, 58, 237, 0.05));
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .hero .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: var(--space-24);
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-48);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--space-16);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--color-accent-cyan);
+            color: var(--color-bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent-cyan);
+            border: 1px solid var(--color-accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px var(--space-24);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: var(--space-48);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-32);
+            margin-bottom: var(--space-48);
+        }
+
+        .service-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-32);
+            transition: all 0.3s;
+            border-left: 4px solid var(--color-accent-cyan);
+        }
+
+        .service-card:hover {
+            border-color: var(--color-accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .service-card.purple {
+            border-left-color: var(--color-accent-purple);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: var(--space-16);
+        }
+
+        .service-card ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .service-card li {
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .service-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent-cyan);
+            font-weight: bold;
+        }
+
+        /* How it Works */
+        .how-it-works {
+            padding: 80px var(--space-24);
+            background: rgba(0, 217, 255, 0.02);
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .how-it-works .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-24);
+            margin-top: var(--space-48);
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            margin: 0 auto var(--space-16);
+        }
+
+        .step h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px var(--space-24);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-32);
+            margin-top: var(--space-48);
+        }
+
+        .pricing-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-32);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--color-accent-cyan);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.15);
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--space-16);
+        }
+
+        .plan-price {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan-period {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            margin-bottom: var(--space-24);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: var(--space-32);
+        }
+
+        .plan-features li {
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .plan-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent-cyan);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            padding: var(--space-48) var(--space-24);
+            text-align: center;
+            color: var(--color-text-secondary);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            nav a {
+                margin-left: var(--space-16);
+                font-size: 12px;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-24);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px var(--space-24);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.03), rgba(124, 58, 237, 0.03));
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-32);
+            margin-top: var(--space-48);
+        }
+
+        .contact-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-32);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--color-accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            font-size: 20px;
+            margin-bottom: var(--space-16);
+            color: var(--color-accent-cyan);
+        }
+
+        .contact-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--color-text-primary);
+        }
+
+        .contact-phone {
+            font-size: 18px;
+            margin-bottom: var(--space-16);
+            color: var(--color-accent-purple);
+            font-weight: 600;
+        }
+
+        .contact-description {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .contact-card a {
+            color: var(--color-accent-cyan);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .contact-card a:hover {
+            color: var(--color-accent-purple);
+        }
+
+        /* Auth Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-48);
+            max-width: 500px;
+            width: 90%;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Personal Cabinet */
+        .cabinet-section {
+            padding: 80px var(--space-24);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .cabinet-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-32);
+        }
+
+        .cabinet-sidebar {
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-24);
+        }
+
+        .cabinet-sidebar h3 {
+            font-size: 18px;
+            margin-bottom: var(--space-24);
+            color: var(--color-accent-cyan);
+        }
+
+        .cabinet-menu {
+            list-style: none;
+        }
+
+        .cabinet-menu li {
+            margin-bottom: 12px;
+        }
+
+        .cabinet-menu a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .cabinet-menu a:hover,
+        .cabinet-menu a.active {
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--color-accent-cyan);
+        }
+
+        .cabinet-main {
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-32);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--color-accent-cyan);
+            border-radius: var(--radius-md);
+            padding: var(--space-48);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            background: rgba(0, 217, 255, 0.02);
+        }
+
+        .upload-area:hover {
+            background: rgba(0, 217, 255, 0.05);
+            border-color: var(--color-accent-purple);
+        }
+
+        .upload-area.dragover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: var(--color-accent-purple);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        .upload-area p {
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .upload-area strong {
+            color: var(--color-accent-cyan);
+        }
+
+            display: none;
+        }
+
+        .generations-list {
+            margin-top: var(--space-32);
+        }
+
+        .generation-item {
+            background: var(--color-bg-primary);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: var(--radius-sm);
+            padding: var(--space-16);
+            margin-bottom: var(--space-16);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .generation-info h4 {
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .generation-info p {
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .generation-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-processing {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--color-accent-purple);
+        }
+
+        .status-ready {
+            background: rgba(0, 217, 255, 0.2);
+            color: var(--color-accent-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .cabinet-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">PhotoAI Pro</div>
+            <div>
+                <a href="#services">Услуги</a>
+                <a href="#portfolio">Примеры работ</a>
+                <a href="#pricing">Цены</a>
+                <a href="#contact">Контакты</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>ИИ-фотосессии и карточки, которые <span>продают</span></h1>
+            <p>За минуты, а не часы. За дни, а не недели.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToContact()">Попробовать бесплатно</button>
+                <button class="btn btn-secondary">Смотреть примеры</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <h3>ИИ-фотосессии</h3>
+                <ul>
+                    <li>Создайте портрет в любом стиле</li>
+                    <li>Неограниченные варианты</li>
+                    <li>Идеально для профилей и портфолио</li>
+                    <li>Разные фоны и эффекты</li>
+                </ul>
+            </div>
+            <div class="service-card purple">
+                <div class="service-icon">📦</div>
+                <h3>Карточки маркетплейсов</h3>
+                <ul>
+                    <li>Фото товара на разных фонах</li>
+                    <li>Множество углов и ракурсов</li>
+                    <li>Увеличение CTR и конверсий</li>
+                    <li>Готовые к загрузке пакеты</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Примеры наших работ</h2>
+            <div style="margin-top: var(--space-48);">
+                <h3 style="font-size: 28px; margin-bottom: var(--space-32); text-align: center;">ИИ-фотосессии</h3>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765861419/search_images/328a0ad97f86eb0a7e5113a58bc53536f52ae994.jpg" alt="Портрет Pro - Кинематография">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Pro</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Кинематография</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765861419/search_images/f1f0eac7eb8ede8ae441ccc1bbd3bb2a6753943b.jpg" alt="Портрет Business - Профессиональный">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Business</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Профессиональный</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765861419/search_images/34e15875fc868c4bf0e59bcdb7db472ab55cd694.jpg" alt="Портрет Casual - Кинематический">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Casual</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Естественный</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765861419/search_images/419a745cc888421dbfa2e5f9956456f17f45cf19.jpg" alt="Портрет Art - Портретная съёмка">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Art</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Профессиональный</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/934a6106cf973bf4fd100a07131bf312b48bc31b.jpg" alt="Портрет Cinematic - Кинематографический">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Cinematic</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Кинематографический</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/0312deeb6eb75a8a9a65da4f7d5da95a0ef70071.jpg" alt="Портрет Anime - Аниме стиль">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Anime</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Аниме</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/54c37814dc82c9226dd7e0babcecc2b50a8b000c.jpg" alt="Портрет Fantasy - Фэнтези">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Fantasy</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Фэнтези</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/4684d39671ddc57037268e13e7720c4a6ac33167.jpg" alt="Портрет Studio - Студийная съёмка">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Studio</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Студийный</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/7fb232b652e6dad226cb48582b7c062f2d16fe1d.jpg" alt="Портрет Watercolor - Акварель">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Watercolor</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Акварель</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/c6af253e9f4fba15c638b94595e1277cb61629cc.jpg" alt="Портрет Character - Персонаж">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Character</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Персонаж</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/3f1c1bbdb746d03fcfa3c8cfc18f05d52a58b440.jpg" alt="Портрет Drama - Драматический">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Drama</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Драматический</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862418/search_images/ad08e199eacb941b378394266119a6ae6d2a5c6d.jpg" alt="Портрет Epic - Эпический">
+                        <p style="margin-top: 12px; text-align: center; color: var(--color-text-secondary);">Портрет Epic</p>
+                        <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary);">Стиль: Эпический</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: var(--space-48);">
+                <h3 style="font-size: 28px; margin-bottom: var(--space-32); text-align: center;">Карточки маркетплейсов</h3>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765861419/search_images/8924a8c421d1b182218e6489f2d928f40fdaa432.jpg" alt="Обувь на белом фоне">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1764055930/search_images/a23bcc84ab5a86bf21a40577cea46905cce261ff.jpg" alt="Украшение Premium на тёмном фоне">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765731835/search_images/5f1a5b3272b8c82a67f2b58efe5d0856a1a215e2.jpg" alt="Камера профессиональная фотография">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1763235125/search_images/1fb6b255e6d75bb7ef7565518ceb6f66d8a0ffbe.jpg" alt="Смартфон в премиум-фотографии">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1763011369/search_images/3da71728625ccb84f23997dcc82c91f54b28f33f.jpg" alt="Люксовые часы на студийном фоне">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765861816/search_images/31d4956debb462f71c3eff329757946fb724b740.jpg" alt="Косметика и красота на белом фоне">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1764883929/search_images/e7d2d7da6d07d145735c2ada9aef86cb35c0c8b3.jpg" alt="Очки профессиональная фотография">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1764083790/search_images/ab1c94b4711af3651b5f9a0d4b81fb427c156e33.jpg" alt="Парфюм премиум на белом фоне">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765861993/search_images/c0560b5dcfa1c5e8736ec7b7a342e8a98541ca78.jpg" alt="Кошелек кожаный студийная съёмка">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1763113725/search_images/d7829b120a24a7d896ed8227680529e9b254048d.jpg" alt="Наушники беспроводные на белом фоне">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765862345/search_images/1ff6c8f314d1de9f9b684af9cf3c01a18d654990.jpg" alt="Ноутбук профессиональная фотография">
+                    </div>
+                    <div class="portfolio-item">
+                        <img class="portfolio-preview" src="https://pplx-res.cloudinary.com/image/upload/v1765792067/search_images/945b89d50ae26041ed9b65df83978342e1add13e.jpg" alt="Кольцо золотое украшение на белом фоне">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Гибкие тарифы</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3 class="plan-name">Бесплатный</h3>
+                <div class="plan-price">0 ₽</div>
+                <div class="plan-period">навсегда</div>
+                <ul class="plan-features">
+                    <li>3 генерации в месяц</li>
+                    <li>Базовые стили</li>
+                    <li>Поддержка по email</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="scrollToContact()">Начать</button>
+            </div>
+            <div class="pricing-card featured">
+                <h3 class="plan-name">Pro</h3>
+                <div class="plan-price">5 000 ₽</div>
+                <div class="plan-period">в месяц</div>
+                <ul class="plan-features">
+                    <li>50 генераций в месяц</li>
+                    <li>Все стили и фильтры</li>
+                    <li>Приоритетная поддержка</li>
+                    <li>Пакетная обработка</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;" onclick="scrollToContact()">Выбрать план</button>
+            </div>
+            <div class="pricing-card">
+                <h3 class="plan-name">Enterprise</h3>
+                <div class="plan-price">По запросу</div>
+                <div class="plan-period">индивидуально</div>
+                <ul class="plan-features">
+                    <li>Неограниченные генерации</li>
+                    <li>API доступ</li>
+                    <li>Персональный менеджер</li>
+                    <li>Custom интеграции</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="scrollToContact()">Связаться</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь с нами</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-32); margin-top: var(--space-48); max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div class="contact-card">
+                    <h3>Email</h3>
+                    <p><a href="mailto:photoai.pro@mail.ru">photoai.pro@mail.ru</a></p>
+                    <p class="contact-description">Ответ в течение 24 часов</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Telegram</h3>
+                    <p><a href="https://t.me/ElenaMorozowwa" target="_blank">@ElenaMorozowwa</a></p>
+                    <p class="contact-description">Менеджер: Елена</p>
+                    <p class="contact-description">Быстрая поддержка и обновления</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="text-align: center; margin-bottom: var(--space-24); color: var(--color-text-primary);">Вход в личный кабинет</h2>
+            
+            <div id="loginStep">
+                <div style="margin-bottom: var(--space-24);">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-text-primary);">Логин или Email</label>
+                    <input type="text" id="authLogin" placeholder="ваш логин или email" style="width: 100%; padding: 12px; background: var(--color-bg-primary); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: var(--radius-sm); color: var(--color-text-primary); font-size: 14px;">
+                </div>
+                
+                <div style="margin-bottom: var(--space-32);">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-text-primary);">Пароль</label>
+                    <input type="password" id="authPassword" placeholder="ваш пароль" style="width: 100%; padding: 12px; background: var(--color-bg-primary); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: var(--radius-sm); color: var(--color-text-primary); font-size: 14px;">
+                </div>
+
+                <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-16);">Войти</button>
+                <button onclick="toggleAuthMode()" class="btn btn-secondary" style="width: 100%;">Нет аккаунта? Зарегистрироваться</button>
+            </div>
+
+            <div id="registerStep" style="display: none;">
+                <div style="margin-bottom: var(--space-24);">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-text-primary);">Желаемый логин</label>
+                    <input type="text" id="regLogin" placeholder="придумайте логин" style="width: 100%; padding: 12px; background: var(--color-bg-primary); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: var(--radius-sm); color: var(--color-text-primary); font-size: 14px;">
+                </div>
+
+                <div style="margin-bottom: var(--space-24);">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-text-primary);">Email</label>
+                    <input type="email" id="regEmail" placeholder="ваш email" style="width: 100%; padding: 12px; background: var(--color-bg-primary); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: var(--radius-sm); color: var(--color-text-primary); font-size: 14px;">
+                </div>
+
+                <div style="margin-bottom: var(--space-32);">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-text-primary);">Пароль</label>
+                    <input type="password" id="regPassword" placeholder="придумайте пароль" style="width: 100%; padding: 12px; background: var(--color-bg-primary); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: var(--radius-sm); color: var(--color-text-primary); font-size: 14px;">
+                </div>
+
+                <button onclick="handleRegister()" class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-16);">Зарегистрироваться</button>
+                <button onclick="toggleAuthMode()" class="btn btn-secondary" style="width: 100%;">Уже есть аккаунт? Войти</button>
+            </div>
+
+            <p style="text-align: center; color: var(--color-text-secondary); font-size: 12px; margin-top: var(--space-16);">Ваши данные безопасны и не будут переданы третьим лицам</p>
+        </div>
+    </div>
+
+    <!-- Personal Cabinet -->
+    <section class="cabinet-section" id="cabinet" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Личный кабинет</h2>
+            <div style="text-align: right; margin-bottom: var(--space-24);">
+                <button onclick="logoutUser()" class="btn btn-secondary" style="padding: 8px 20px; font-size: 14px;">Выйти</button>
+            </div>
+            <div class="cabinet-container">
+
+    <!-- Personal Cabinet -->
+    <section class="cabinet-section" id="cabinet" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Личный кабинет</h2>
+            <div style="text-align: right; margin-bottom: var(--space-24);">
+                <button onclick="logoutUser()" class="btn btn-secondary" style="padding: 8px 20px; font-size: 14px;">Выйти</button>
+            </div>
+            <div class="cabinet-container">
+                <div class="cabinet-sidebar">
+                    <h3>Меню</h3>
+                    <ul class="cabinet-menu">
+                        <li><a href="#" class="cabinet-link active" data-tab="upload">Загрузить фото</a></li>
+                        <li><a href="#" class="cabinet-link" data-tab="history">История генераций</a></li>
+                        <li><a href="#" class="cabinet-link" data-tab="settings">Настройки</a></li>
+                        <li><a href="#" class="cabinet-link" data-tab="account">Профиль</a></li>
+                    </ul>
+                </div>
+                <div class="cabinet-main">
+                    <!-- Upload Tab -->
+                    <div class="cabinet-tab active" data-tab="upload">
+                        <h3 style="margin-bottom: var(--space-24);">Загрузить фото для генерации</h3>
+                        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon">📸</div>
+                            <p><strong>Нажмите или перетащите</strong> файл сюда</p>
+                            <p>Поддерживаемые форматы: JPG, PNG (максимум 10 МБ)</p>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*">
+                        <div id="uploadStatus" style="margin-top: var(--space-24); display: none;">
+                            <p style="color: var(--color-accent-cyan); font-weight: 600;">✓ Файл загружен успешно!</p>
+                            <img id="uploadPreview" src="" alt="Preview" style="max-width: 200px; border-radius: var(--radius-sm); margin-top: var(--space-16);">
+                            <button class="btn btn-primary" style="margin-top: var(--space-16); width: 100%;">Начать генерацию</button>
+                        </div>
+                    </div>
+
+                    <!-- History Tab -->
+                    <div class="cabinet-tab" data-tab="history" style="display: none;">
+                        <h3 style="margin-bottom: var(--space-24);">История генераций</h3>
+                        <div class="generations-list">
+                            <div class="generation-item">
+                                <div class="generation-info">
+                                    <h4>Портрет - Стиль Кинематография</h4>
+                                    <p>Завершено 2025-12-16 07:30</p>
+                                </div>
+                                <div class="generation-status">
+                                    <span class="status-badge status-ready">Готово</span>
+                                    <button class="btn btn-secondary" style="padding: 6px 16px; font-size: 12px;">Скачать</button>
+                                </div>
+                            </div>
+                            <div class="generation-item">
+                                <div class="generation-info">
+                                    <h4>Карточка товара - Белый фон</h4>
+                                    <p>Завершено 2025-12-16 06:45</p>
+                                </div>
+                                <div class="generation-status">
+                                    <span class="status-badge status-ready">Готово</span>
+                                    <button class="btn btn-secondary" style="padding: 6px 16px; font-size: 12px;">Скачать</button>
+                                </div>
+                            </div>
+                            <div class="generation-item">
+                                <div class="generation-info">
+                                    <h4>Портрет - Стиль Аниме</h4>
+                                    <p>В процессе...</p>
+                                </div>
+                                <div class="generation-status">
+                                    <span class="status-badge status-processing">Обработка</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="cabinet-tab" data-tab="settings" style="display: none;">
+                        <h3 style="margin-bottom: var(--space-24);">Настройки</h3>
+                        <div style="max-width: 500px;">
+                            <div style="margin-bottom: var(--space-24);">
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Тип генерации по умолчанию</label>
+                                <select style="width: 100%; padding: 10px; background: var(--color-bg-primary); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: var(--radius-sm); color: var(--color-text-primary); cursor: pointer;">
+                                    <option>Портреты (ИИ-фотосессии)</option>
+                                    <option>Карточки маркетплейсов</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: var(--space-24);">
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Уведомления</label>
+                                <input type="checkbox" style="margin-right: 8px;"> Получать уведомления о завершении генераций
+                            </div>
+                            <button class="btn btn-primary">Сохранить настройки</button>
+                        </div>
+                    </div>
+
+                    <!-- Account Tab -->
+                    <div class="cabinet-tab" data-tab="account" style="display: none;">
+                        <h3 style="margin-bottom: var(--space-24);">Ваш профиль</h3>
+                        <div style="max-width: 500px;">
+                            <p><strong>Email/Телефон:</strong> <span id="userContact">-</span></p>
+                            <p style="margin-top: 12px;"><strong>План:</strong> <span style="color: var(--color-accent-cyan);">Pro</span></p>
+                            <p style="margin-top: 12px;"><strong>Использовано генераций:</strong> 32 из 50</p>
+                            <p style="margin-top: 12px;"><strong>Дата окончания подписки:</strong> 2025-01-16</p>
+                            <button class="btn btn-secondary" style="margin-top: var(--space-24);" onclick="logoutUser()">Выйти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PhotoAI Pro. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll to contact section
+        function scrollToContact() {
+            const contactSection = document.getElementById('contact');
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scroll and button interactions
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const text = this.textContent;
+                if (text.includes('Смотреть')) {
+                    document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+                } else if (text.includes('Связаться')) {
+                    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Prevent link defaults
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !this.classList.contains('cabinet-link')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
