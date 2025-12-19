@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elenam7020.github.io/photo-ai-site/sitemap.xml
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /
