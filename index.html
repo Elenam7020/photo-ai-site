@@ -3,217 +3,315 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMM и дизайн для маркетплейсов — Elena M</title>
+<title>PRS Agency — Digital Marketing & Strategy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f0f0f;
-    color: #ffffff;
-    line-height: 1.6;
+:root{
+  --bg:#0b0c10;
+  --card:#141621;
+  --accent1:#7c7cff;
+  --accent2:#00ffd5;
+  --text:#ffffff;
+  --muted:#9aa0b3;
 }
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 60px 20px;
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:radial-gradient(1200px 600px at 10% -10%, #1a1c3a 0%, transparent 60%),
+             radial-gradient(800px 400px at 90% 10%, #003c3c 0%, transparent 55%),
+             var(--bg);
+  color:var(--text);
 }
-h1, h2, h3 {
-    margin-bottom: 20px;
+
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  background:rgba(11,12,16,.7);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #1f2233;
 }
-h1 {
-    font-size: 42px;
+nav .wrap{
+  max-width:1200px;
+  margin:auto;
+  padding:16px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-h2 {
-    font-size: 32px;
+nav a{
+  color:var(--muted);
+  margin-left:20px;
+  text-decoration:none;
+  font-weight:500;
+  transition:.3s;
 }
-h3 {
-    font-size: 22px;
+nav a:hover{color:var(--text);}
+
+section{
+  min-height:100vh;
+  padding:120px 24px;
+  display:flex;
+  align-items:center;
 }
-p {
-    opacity: 0.85;
+.container{
+  max-width:1200px;
+  margin:auto;
 }
-ul {
-    opacity: 0.85;
+
+h1{
+  font-size:clamp(42px,6vw,84px);
+  line-height:1.05;
+  margin:0 0 30px;
 }
-.button {
-    display: inline-block;
-    background: #6a5acd;
-    color: #fff;
-    padding: 14px 26px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 20px;
+h2{
+  font-size:clamp(32px,4vw,56px);
+  margin-bottom:40px;
 }
-.section {
-    border-top: 1px solid #222;
+h3{
+  font-size:22px;
 }
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+
+p{
+  color:var(--muted);
+  max-width:680px;
 }
-.card {
-    background: #181818;
-    padding: 30px;
-    border-radius: 10px;
+
+.btn{
+  display:inline-block;
+  padding:16px 32px;
+  border-radius:40px;
+  font-weight:600;
+  text-decoration:none;
+  color:#000;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 0 rgba(0,255,213,.0);
+  transition:.4s;
 }
-.highlight {
-    color: #a99bff;
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 20px 40px rgba(0,255,213,.25);
+}
+
+.grid{
+  display:grid;
+  gap:32px;
+}
+.cols-3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+.cols-4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+
+.card{
+  background:linear-gradient(180deg,#181a2a,#0f101a);
+  border-radius:20px;
+  padding:32px;
+  border:1px solid #1f2233;
+  transition:.4s;
+}
+.card:hover{
+  transform:translateY(-10px);
+  border-color:var(--accent1);
+}
+
+.hero{
+  background:
+    radial-gradient(500px 300px at 20% 20%,rgba(124,124,255,.25),transparent 60%),
+    radial-gradient(500px 300px at 80% 60%,rgba(0,255,213,.25),transparent 60%);
+}
+
+.tag{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:20px;
+  background:rgba(124,124,255,.15);
+  color:var(--accent1);
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+.team img{
+  width:100%;
+  border-radius:16px;
+  margin-bottom:16px;
+}
+
+.review{
+  font-size:18px;
+  line-height:1.5;
+}
+
+footer{
+  padding:60px 24px;
+  border-top:1px solid #1f2233;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* animations */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+.fade.show{
+  opacity:1;
+  transform:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="container">
-    <h1>Маркетинг и SMM, которые приводят клиентов,<br>а не отчёты</h1>
+<nav>
+  <div class="wrap">
+    <strong>PRS Agency</strong>
+    <div>
+      <a href="#home">Главная</a>
+      <a href="#about">О компании</a>
+      <a href="#services">Услуги</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#team">Команда</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </div>
+  </div>
+</nav>
+
+<section id="home" class="hero">
+  <div class="container fade">
+    <span class="tag">Digital marketing agency</span>
+    <h1>Маркетинг, который<br>двигает бизнес вперёд</h1>
     <p>
-        Помогаю бизнесу продавать через соцсети и маркетплейсы:
-        <span class="highlight">карточки товаров, SMM, стратегия, контент</span>.
-        Без шаблонов и пустых обещаний.
+      PRS Agency — команда стратегов, дизайнеров и маркетологов.
+      Мы выстраиваем системный digital-маркетинг, который приводит клиентов,
+      а не просто создаёт активность.
     </p>
-    <a href="https://t.me/prs_business_bot" class="button">Бесплатная консультация</a>
-</div>
+    <a href="#contacts" class="btn">Бесплатная консультация</a>
+  </div>
+</section>
 
-<!-- PROBLEMS -->
-<div class="container section">
-    <h2>С какими проблемами ко мне приходят</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>❌ Нет продаж</h3>
-            <p>Карточки есть, контент выходит, но заявок нет или они слишком дорогие.</p>
-        </div>
-        <div class="card">
-            <h3>❌ Сливается бюджет</h3>
-            <p>Реклама и SMM не окупаются, нет понимания, что именно не работает.</p>
-        </div>
-        <div class="card">
-            <h3>❌ Нет системы</h3>
-            <p>Посты, акции и дизайн делаются хаотично, без стратегии.</p>
-        </div>
-        <div class="card">
-            <h3>❌ Низкая конверсия</h3>
-            <p>Люди смотрят, но не покупают — упаковка не убеждает.</p>
-        </div>
-    </div>
-</div>
-
-<!-- CASES -->
-<div class="container section">
-    <h2>Кейсы и результаты</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Маркетплейсы</h3>
-            <p>
-                ✔ Переработка карточек товаров<br>
-                ✔ Рост CTR и конверсии<br>
-                ✔ Увеличение продаж без роста бюджета
-            </p>
-        </div>
-        <div class="card">
-            <h3>SMM для услуг</h3>
-            <p>
-                ✔ Чёткое позиционирование<br>
-                ✔ Системный контент<br>
-                ✔ Рост входящих заявок
-            </p>
-        </div>
-        <div class="card">
-            <h3>Консалтинг</h3>
-            <p>
-                ✔ Разбор воронки продаж<br>
-                ✔ Поиск точек потери денег<br>
-                ✔ План роста
-            </p>
-        </div>
-    </div>
-    <p style="margin-top:20px; opacity:0.7;">
-        Подробные цифры и кейсы показываю на консультации.
-    </p>
-</div>
-
-<!-- PROCESS -->
-<div class="container section">
-    <h2>Как проходит работа</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>1. Диагностика</h3>
-            <p>Анализ продукта, конкурентов, упаковки и текущих продаж.</p>
-        </div>
-        <div class="card">
-            <h3>2. Стратегия</h3>
-            <p>Определяем, что именно даст результат, а не просто активность.</p>
-        </div>
-        <div class="card">
-            <h3>3. Реализация</h3>
-            <p>Контент, дизайн, карточки и тексты под конкретную цель.</p>
-        </div>
-        <div class="card">
-            <h3>4. Оптимизация</h3>
-            <p>Корректируем решения по фактическим результатам.</p>
-        </div>
-    </div>
-</div>
-
-<!-- SERVICES -->
-<div class="container section">
-    <h2>Услуги и пакеты</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Карточки товаров</h3>
-            <p>
-                ✔ Анализ конкурентов<br>
-                ✔ Продающий дизайн<br>
-                ✔ Структура под маркетплейсы
-            </p>
-            <strong>1 600 ₽ / карточка</strong>
-        </div>
-        <div class="card">
-            <h3>SMM под ключ</h3>
-            <p>
-                ✔ Контент-план<br>
-                ✔ Дизайн и тексты<br>
-                ✔ Стратегия продвижения
-            </p>
-            <strong>24 000 ₽ / месяц</strong>
-        </div>
-        <div class="card">
-            <h3>Разовые услуги</h3>
-            <p>
-                ✔ Аудит<br>
-                ✔ Консультация<br>
-                ✔ Стратегия
-            </p>
-            <strong>от 5 000 ₽</strong>
-        </div>
-    </div>
-</div>
-
-<!-- CHECKLIST -->
-<div class="container section">
-    <h2>Чек-лист самодиагностики маркетинга</h2>
-    <p>Проверьте, почему маркетинг не даёт результата:</p>
-    <ul>
-        <li>✔ Понимаете ли вы своего клиента?</li>
-        <li>✔ Есть ли чёткое УТП?</li>
-        <li>✔ Продают ли карточки и контент?</li>
-        <li>✔ Есть ли система, а не хаос?</li>
-    </ul>
-    <a href="https://t.me/prs_business_bot" class="button">Получить чек-лист</a>
-</div>
-
-<!-- CTA -->
-<div class="container section">
-    <h2>Бесплатная консультация</h2>
+<section id="about">
+  <div class="container fade">
+    <h2>О компании</h2>
     <p>
-        Разберу вашу ситуацию и скажу честно,
-        где вы теряете деньги и что можно улучшить.
+      Мы работаем с B2B и e-commerce проектами, помогая бизнесу расти за счёт
+      стратегии, упаковки и понятной воронки продаж. Никаких шаблонов —
+      только решения под конкретные цели.
     </p>
-    <a href="https://t.me/prs_business_bot" class="button">Записаться в Telegram</a>
-</div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container fade">
+    <h2>Наши услуги</h2>
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>SMM под ключ</h3>
+        <p>Стратегия, контент, дизайн и аналитика. Системная работа на результат.</p>
+      </div>
+      <div class="card">
+        <h3>Карточки маркетплейсов</h3>
+        <p>Продающий дизайн, структура и анализ конкурентов.</p>
+      </div>
+      <div class="card">
+        <h3>Стратегический консалтинг</h3>
+        <p>Разбор воронки, позиционирования и точек роста.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="container fade">
+    <h2>Кейсы</h2>
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>E-commerce</h3>
+        <p>Рост конверсии карточек и увеличение продаж без роста рекламного бюджета.</p>
+      </div>
+      <div class="card">
+        <h3>B2B-услуги</h3>
+        <p>Выстроена воронка и позиционирование, увеличен поток заявок.</p>
+      </div>
+      <div class="card">
+        <h3>Маркетплейсы</h3>
+        <p>Полная переработка упаковки и рост CTR.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="container fade">
+    <h2>Наша команда</h2>
+    <div class="grid cols-4 team">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x300" alt="">
+        <strong>Strategy Lead</strong>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x300" alt="">
+        <strong>Design Lead</strong>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x300" alt="">
+        <strong>SMM Manager</strong>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x300" alt="">
+        <strong>Analytics</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container fade">
+    <h2>Отзывы клиентов</h2>
+    <div class="grid cols-3">
+      <div class="card review">
+        «Работа с агентством дала понятную стратегию и рост заявок уже в первый месяц.»
+      </div>
+      <div class="card review">
+        «Наконец-то появился системный маркетинг, а не хаотичные действия.»
+      </div>
+      <div class="card review">
+        «Отличное понимание B2B и маркетплейсов.»
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="container fade">
+    <h2>Контакты</h2>
+    <p>
+      Запишитесь на бесплатную консультацию — разберём ваш проект
+      и покажем точки роста.
+    </p>
+    <a href="https://t.me/prs_business_bot" class="btn">Связаться в Telegram</a>
+  </div>
+</section>
+
+<footer>
+  © PRS Agency. Digital marketing & strategy
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('show');
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+</script>
 
 </body>
 </html>
