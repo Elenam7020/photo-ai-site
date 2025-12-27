@@ -3,291 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRS Agency — маркетинг и дизайн</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+<title>PRS Agency — Премиальный маркетинг и дизайн</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6f7fb;
-  --white:#ffffff;
-  --text:#1a1a1a;
-  --muted:#6b7280;
-  --accent:#6c63ff;
-  --accent-soft:#ecebff;
-  --border:#e5e7eb;
+--primary:#1a1a1a;
+--accent:#0066ff;
+--bg:#ffffff;
+--gray:#f5f5f5;
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--primary);overflow-x:hidden;}
 
-*{box-sizing:border-box;}
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow:hidden;
-}
+/* Smooth Scroll */
+html{scroll-behavior:smooth;}
 
-/* HORIZONTAL LAYOUT */
-.wrapper{
-  display:flex;
-  flex-direction:row;
-  width:600vw;
-  height:100vh;
-  transition:transform .6s ease;
+/* Animations */
+@keyframes fadeInUp{
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;transform:translateY(0);}
 }
-section{
-  width:100vw;
-  height:100vh;
-  padding:80px 60px;
-  display:flex;
-  align-items:center;
+@keyframes slideIn{
+from{opacity:0;transform:translateX(-50px);}
+to{opacity:1;transform:translateX(0);}
 }
-.container{
-  max-width:1100px;
-}
+.fade-in{animation:fadeInUp 0.8s ease forwards;opacity:0;}
+.slide-in{animation:slideIn 0.6s ease forwards;opacity:0;}
 
-h1{
-  font-size:56px;
-  line-height:1.1;
-  margin-bottom:30px;
-}
-h2{
-  font-size:40px;
-  margin-bottom:30px;
-}
-h3{
-  font-size:22px;
-  margin-bottom:10px;
-}
-p{
-  color:var(--muted);
-  max-width:700px;
-}
+/* Header */
+header{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;padding:20px 5%;box-shadow:0 2px 20px rgba(0,0,0,0.05);transition:all 0.3s;}
+nav{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;}
+.logo{font-size:28px;font-weight:700;color:var(--accent);}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--primary);font-weight:500;transition:color 0.3s;}
+.nav-links a:hover{color:var(--accent);}
+.cta-btn{background:var(--accent);color:white;padding:12px 30px;border-radius:50px;text-decoration:none;font-weight:600;transition:transform 0.3s,box-shadow 0.3s;}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,102,255,0.3);}
 
-.btn{
-  display:inline-block;
-  padding:16px 34px;
-  border-radius:40px;
-  background:var(--accent);
-  color:#fff;
-  text-decoration:none;
-  font-weight:600;
-  margin-top:30px;
-  transition:.3s;
+/* Hero Section */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.1) 1px,transparent 1px);background-size:50px 50px;animation:moveGrid 20s linear infinite;}
+@keyframes moveGrid{
+0%{transform:translate(0,0);}
+100%{transform:translate(50px,50px);}
 }
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 30px rgba(108,99,255,.35);
-}
+.hero-content{position:relative;z-index:1;max-width:900px;padding:0 20px;}
+.hero h1{font-size:72px;font-weight:700;margin-bottom:20px;line-height:1.2;}
+.hero p{font-size:24px;margin-bottom:40px;opacity:0.9;}
+.hero-btns{display:flex;gap:20px;justify-content:center;}
+.btn-primary{background:white;color:var(--accent);}
+.btn-secondary{background:transparent;color:white;border:2px solid white;}
+.btn-primary,.btn-secondary{padding:15px 40px;border-radius:50px;text-decoration:none;font-weight:600;transition:all 0.3s;display:inline-block;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,255,255,0.3);}
+.btn-secondary:hover{background:white;color:var(--accent);}
 
-/* CARDS */
-.grid{
-  display:grid;
-  gap:28px;
-}
-.cols-3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+/* Services Section */
+.services{padding:120px 5%;background:var(--gray);}
+.section-title{text-align:center;font-size:48px;font-weight:700;margin-bottom:60px;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;max-width:1400px;margin:0 auto;}
+.service-card{background:white;padding:50px;border-radius:20px;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;}
+.service-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,0.1);}
+.service-icon{font-size:50px;margin-bottom:20px;}
+.service-card h3{font-size:24px;margin-bottom:15px;}
+.service-card p{color:#666;line-height:1.6;}
+.service-price{font-size:28px;font-weight:700;color:var(--accent);margin-top:20px;}
 
-.card{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:28px;
-  transition:.3s;
-}
-.card:hover{
-  transform:translateY(-6px);
-  border-color:var(--accent);
-}
+/* Portfolio Section */
+.portfolio{padding:120px 5%;}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:30px;max-width:1400px;margin:0 auto;}
+.portfolio-item{position:relative;border-radius:20px;overflow:hidden;height:400px;background:linear-gradient(45deg,#667eea,#764ba2);cursor:pointer;transition:transform 0.3s;}
+.portfolio-item:hover{transform:scale(1.05);}
+.portfolio-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.8));color:white;padding:30px;transform:translateY(20px);transition:transform 0.3s;}
+.portfolio-item:hover .portfolio-overlay{transform:translateY(0);}
 
-.price{
-  font-size:26px;
-  font-weight:800;
-  color:var(--accent);
-  margin-top:14px;
-}
-.old{
-  text-decoration:line-through;
-  color:#9ca3af;
-  font-size:14px;
-}
+/* Contact Section */
+.contact{padding:120px 5%;background:var(--primary);color:white;text-align:center;}
+.contact .section-title{color:white;}
+.contact-info{display:flex;justify-content:center;gap:60px;margin-top:60px;flex-wrap:wrap;}
+.contact-item{display:flex;flex-direction:column;align-items:center;gap:15px;}
+.contact-icon{font-size:40px;color:var(--accent);}
+.telegram-btn{display:inline-block;margin-top:40px;background:var(--accent);color:white;padding:20px 50px;border-radius:50px;text-decoration:none;font-size:20px;font-weight:600;transition:all 0.3s;}
+.telegram-btn:hover{transform:scale(1.1);box-shadow:0 15px 40px rgba(0,102,255,0.4);}
 
-/* NAV */
-.nav{
-  position:fixed;
-  bottom:24px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:10px;
-  z-index:10;
-}
-.nav button{
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  border:none;
-  background:#d1d5db;
-  cursor:pointer;
-}
-.nav button.active{
-  background:var(--accent);
-}
+/* Footer */
+footer{background:#0a0a0a;color:#888;padding:40px 5%;text-align:center;}
 
-/* ACCENTS */
-.badge{
-  display:inline-block;
-  background:var(--accent-soft);
-  color:var(--accent);
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:14px;
-  margin-bottom:16px;
+/* Responsive */
+@media(max-width:768px){
+.hero h1{font-size:42px;}
+.hero p{font-size:18px;}
+.services-grid,.portfolio-grid{grid-template-columns:1fr;}
+.nav-links{display:none;}
 }
 </style>
 </head>
-
 <body>
 
-<div class="wrapper" id="wrapper">
+<header>
+<nav>
+<div class="logo">PRS Agency</div>
+<ul class="nav-links">
+<li><a href="#services">Услуги</a></li>
+<li><a href="#portfolio">Портфолио</a></li>
+<li><a href="#contact">Контакты</a></li>
+</ul>
+<a href="https://t.me/prs_business_bot" class="cta-btn">Начать проект</a>
+</nav>
+</header>
 
-<!-- HERO -->
-<section>
-  <div class="container">
-    <span class="badge">Маркетинговое агентство</span>
-    <h1>Маркетинг и дизайн,<br>которые приносят продажи</h1>
-    <p>
-      PRS Agency — команда маркетологов и дизайнеров.
-      Помогаем бизнесу и маркетплейсам расти за счёт системного SMM,
-      продающих карточек и понятной стратегии.
-    </p>
-    <a href="https://t.me/prs_business_bot" class="btn">Бесплатная консультация</a>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section>
-  <div class="container">
-    <h2>О компании</h2>
-    <p>
-      Мы работаем с малым и средним бизнесом, которому нужен результат,
-      а не красивые отчёты. Фокус — продажи, конверсия и понятная экономика.
-      За счёт оптимизированных процессов мы держим цены ниже рынка,
-      сохраняя качество.
-    </p>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section>
-  <div class="container">
-    <h2>Услуги</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>SMM ведение</h3>
-        <p>Стратегия, контент, визуал, аналитика.</p>
-        <div class="old">30 000 – 35 000 ₽</div>
-        <div class="price">17 000 ₽ / мес</div>
-      </div>
-      <div class="card">
-        <h3>Карточки товаров</h3>
-        <p>Дизайн под маркетплейсы с фокусом на конверсию.</p>
-        <div class="old">2 000 – 3 000 ₽</div>
-        <div class="price">1 200 ₽ / шт</div>
-      </div>
-      <div class="card">
-        <h3>Дизайн постов</h3>
-        <p>Современный визуал для соцсетей.</p>
-        <div class="old">1 000 – 1 500 ₽</div>
-        <div class="price">700 ₽ / шт</div>
-      </div>
-      <div class="card">
-        <h3>Контент-план</h3>
-        <p>Структура публикаций под цели бизнеса.</p>
-        <div class="old">10 000 – 15 000 ₽</div>
-        <div class="price">7 000 ₽ / мес</div>
-      </div>
-      <div class="card">
-        <h3>Консультация</h3>
-        <p>Разбор текущей ситуации и точек роста.</p>
-        <div class="old">7 000 – 10 000 ₽</div>
-        <div class="price">3 500 ₽</div>
-      </div>
-      <div class="card">
-        <h3>Маркетинговый аудит</h3>
-        <p>Глубокий анализ SMM и упаковки.</p>
-        <div class="old">8 000 – 12 000 ₽</div>
-        <div class="price">5 000 ₽</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CASES -->
-<section>
-  <div class="container">
-    <h2>Портфолио и кейсы</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Маркетплейс</h3>
-        <p>Рост CTR карточек и увеличение продаж без роста бюджета.</p>
-      </div>
-      <div class="card">
-        <h3>B2B услуги</h3>
-        <p>Выстроена воронка и увеличено число заявок.</p>
-      </div>
-      <div class="card">
-        <h3>Контент + SMM</h3>
-        <p>Системный контент и стабильный поток лидов.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTS -->
-<section>
-  <div class="container">
-    <h2>Контакты</h2>
-    <p>
-      Запишитесь на бесплатную консультацию —
-      разберём ваш проект и покажем точки роста.
-    </p>
-    <a href="https://t.me/prs_business_bot" class="btn">Связаться в Telegram</a>
-  </div>
-</section>
-
+<section class="hero">
+<div class="hero-content fade-in">
+<h1>Создаём бренды будущего</h1>
+<p>Премиальные решения в маркетинге и дизайне для вашего бизнеса</p>
+<div class="hero-btns">
+<a href="#services" class="btn-primary">Наши услуги</a>
+<a href="https://t.me/prs_business_bot" class="btn-secondary">Связаться</a>
 </div>
+</div>
+</section>
 
-<div class="nav" id="nav"></div>
+<section id="services" class="services">
+<h2 class="section-title slide-in">Наши услуги</h2>
+<div class="services-grid">
+<div class="service-card fade-in" style="animation-delay:0.1s">
+<div class="service-icon">🎯</div>
+<h3>Таргетированная реклама</h3>
+<p>Настройка и ведение рекламных кампаний в Telegram с максимальной конверсией</p>
+<div class="service-price">от 15 000 ₽</div>
+</div>
+<div class="service-card fade-in" style="animation-delay:0.2s">
+<div class="service-icon">✨</div>
+<h3>Дизайн и брендинг</h3>
+<p>Создание уникального визуального стиля вашего бренда: логотипы, фирменный стиль, упаковка</p>
+<div class="service-price">от 25 000 ₽</div>
+</div>
+<div class="service-card fade-in" style="animation-delay:0.3s">
+<div class="service-icon">📱</div>
+<h3>SMM продвижение</h3>
+<p>Комплексное продвижение в социальных сетях с разработкой контент-стратегии</p>
+<div class="service-price">от 20 000 ₽</div>
+</div>
+<div class="service-card fade-in" style="animation-delay:0.4s">
+<div class="service-icon">🚀</div>
+<h3>Комплексный маркетинг</h3>
+<p>Полный цикл маркетинговых услуг: от стратегии до реализации</p>
+<div class="service-price">от 50 000 ₽</div>
+</div>
+<div class="service-card fade-in" style="animation-delay:0.5s">
+<div class="service-icon">📊</div>
+<h3>Аналитика и отчётность</h3>
+<p>Глубокий анализ результатов с рекомендациями по оптимизации</p>
+<div class="service-price">от 10 000 ₽</div>
+</div>
+<div class="service-card fade-in" style="animation-delay:0.6s">
+<div class="service-icon">💼</div>
+<h3>Консалтинг</h3>
+<p>Экспертные консультации по развитию вашего бизнеса</p>
+<div class="service-price">от 5 000 ₽</div>
+</div>
+</div>
+</section>
+
+<section id="portfolio" class="portfolio">
+<h2 class="section-title">Наши проекты</h2>
+<div class="portfolio-grid">
+<div class="portfolio-item fade-in" style="animation-delay:0.1s">
+<div class="portfolio-overlay">
+<h3>Интернет-магазин</h3>
+<p>Рост продаж на 340% за 3 месяца</p>
+</div>
+</div>
+<div class="portfolio-item fade-in" style="animation-delay:0.2s">
+<div class="portfolio-overlay">
+<h3>Образовательный проект</h3>
+<p>15 000+ подписчиков за 2 месяца</p>
+</div>
+</div>
+<div class="portfolio-item fade-in" style="animation-delay:0.3s">
+<div class="portfolio-overlay">
+<h3>B2B сервис</h3>
+<p>Снижение стоимости лида в 2.5 раза</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<h2 class="section-title">Готовы начать?</h2>
+<p style="font-size:20px;margin-bottom:40px;">Свяжитесь с нами для обсуждения вашего проекта</p>
+<div class="contact-info">
+<div class="contact-item">
+<div class="contact-icon">📧</div>
+<div>
+<strong>Email</strong><br>
+info@prsagency.ru
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">💬</div>
+<div>
+<strong>Telegram</strong><br>
+@prs_business_bot
+</div>
+</div>
+</div>
+<a href="https://t.me/prs_business_bot" class="telegram-btn">Написать в Telegram</a>
+</section>
+
+<footer>
+<p>&copy; 2025 PRS Agency. Все права защищены.</p>
+</footer>
 
 <script>
-const wrapper = document.getElementById('wrapper');
-const sections = document.querySelectorAll('section');
-const nav = document.getElementById('nav');
-let index = 0;
-let locked = false;
+// Intersection Observer for animations
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.style.opacity='1';
+}
+});
+},{threshold:0.1});
 
-sections.forEach((_,i)=>{
-  const b=document.createElement('button');
-  if(i===0) b.classList.add('active');
-  b.onclick=()=>go(i);
-  nav.appendChild(b);
+document.querySelectorAll('.fade-in, .slide-in').forEach(el=>{
+observer.observe(el);
 });
 
-function go(i){
-  if(i<0||i>=sections.length) return;
-  index=i;
-  wrapper.style.transform=`translateX(-${i*100}vw)`;
-  document.querySelectorAll('.nav button').forEach((b,j)=>{
-    b.classList.toggle('active',j===i);
-  });
+// Smooth header on scroll
+window.addEventListener('scroll',()=>{
+const header=document.querySelector('header');
+if(window.scrollY>50){
+header.style.padding='15px 5%';
+}else{
+header.style.padding='20px 5%';
 }
-
-window.addEventListener('wheel',e=>{
-  if(locked) return;
-  locked=true;
-  if(e.deltaY>0) go(index+1);
-  else go(index-1);
-  setTimeout(()=>locked=false,700);
 });
 </script>
 
