@@ -3,314 +3,292 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRS Agency — Digital Marketing & Strategy</title>
+<title>PRS Agency — маркетинг и дизайн</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#0b0c10;
-  --card:#141621;
-  --accent1:#7c7cff;
-  --accent2:#00ffd5;
-  --text:#ffffff;
-  --muted:#9aa0b3;
+  --bg:#f6f7fb;
+  --white:#ffffff;
+  --text:#1a1a1a;
+  --muted:#6b7280;
+  --accent:#6c63ff;
+  --accent-soft:#ecebff;
+  --border:#e5e7eb;
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:radial-gradient(1200px 600px at 10% -10%, #1a1c3a 0%, transparent 60%),
-             radial-gradient(800px 400px at 90% 10%, #003c3c 0%, transparent 55%),
-             var(--bg);
+  background:var(--bg);
   color:var(--text);
+  overflow:hidden;
 }
 
-nav{
-  position:fixed;
-  top:0;left:0;right:0;
-  z-index:100;
-  background:rgba(11,12,16,.7);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #1f2233;
-}
-nav .wrap{
-  max-width:1200px;
-  margin:auto;
-  padding:16px 24px;
+/* HORIZONTAL LAYOUT */
+.wrapper{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
+  flex-direction:row;
+  width:600vw;
+  height:100vh;
+  transition:transform .6s ease;
 }
-nav a{
-  color:var(--muted);
-  margin-left:20px;
-  text-decoration:none;
-  font-weight:500;
-  transition:.3s;
-}
-nav a:hover{color:var(--text);}
-
 section{
-  min-height:100vh;
-  padding:120px 24px;
+  width:100vw;
+  height:100vh;
+  padding:80px 60px;
   display:flex;
   align-items:center;
 }
 .container{
-  max-width:1200px;
-  margin:auto;
+  max-width:1100px;
 }
 
 h1{
-  font-size:clamp(42px,6vw,84px);
-  line-height:1.05;
-  margin:0 0 30px;
+  font-size:56px;
+  line-height:1.1;
+  margin-bottom:30px;
 }
 h2{
-  font-size:clamp(32px,4vw,56px);
-  margin-bottom:40px;
+  font-size:40px;
+  margin-bottom:30px;
 }
 h3{
   font-size:22px;
+  margin-bottom:10px;
 }
-
 p{
   color:var(--muted);
-  max-width:680px;
+  max-width:700px;
 }
 
 .btn{
   display:inline-block;
-  padding:16px 32px;
+  padding:16px 34px;
   border-radius:40px;
-  font-weight:600;
+  background:var(--accent);
+  color:#fff;
   text-decoration:none;
-  color:#000;
-  background:linear-gradient(135deg,var(--accent1),var(--accent2));
-  box-shadow:0 0 0 rgba(0,255,213,.0);
-  transition:.4s;
+  font-weight:600;
+  margin-top:30px;
+  transition:.3s;
 }
 .btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 20px 40px rgba(0,255,213,.25);
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(108,99,255,.35);
 }
 
+/* CARDS */
 .grid{
   display:grid;
-  gap:32px;
+  gap:28px;
 }
 .cols-3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
-.cols-4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
 
 .card{
-  background:linear-gradient(180deg,#181a2a,#0f101a);
-  border-radius:20px;
-  padding:32px;
-  border:1px solid #1f2233;
-  transition:.4s;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:28px;
+  transition:.3s;
 }
 .card:hover{
-  transform:translateY(-10px);
-  border-color:var(--accent1);
+  transform:translateY(-6px);
+  border-color:var(--accent);
 }
 
-.hero{
-  background:
-    radial-gradient(500px 300px at 20% 20%,rgba(124,124,255,.25),transparent 60%),
-    radial-gradient(500px 300px at 80% 60%,rgba(0,255,213,.25),transparent 60%);
+.price{
+  font-size:26px;
+  font-weight:800;
+  color:var(--accent);
+  margin-top:14px;
 }
-
-.tag{
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:20px;
-  background:rgba(124,124,255,.15);
-  color:var(--accent1);
-  margin-bottom:20px;
+.old{
+  text-decoration:line-through;
+  color:#9ca3af;
   font-size:14px;
 }
 
-.team img{
-  width:100%;
-  border-radius:16px;
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  z-index:10;
+}
+.nav button{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  border:none;
+  background:#d1d5db;
+  cursor:pointer;
+}
+.nav button.active{
+  background:var(--accent);
+}
+
+/* ACCENTS */
+.badge{
+  display:inline-block;
+  background:var(--accent-soft);
+  color:var(--accent);
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:14px;
   margin-bottom:16px;
-}
-
-.review{
-  font-size:18px;
-  line-height:1.5;
-}
-
-footer{
-  padding:60px 24px;
-  border-top:1px solid #1f2233;
-  text-align:center;
-  color:var(--muted);
-}
-
-/* animations */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
-}
-.fade.show{
-  opacity:1;
-  transform:none;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="wrap">
-    <strong>PRS Agency</strong>
-    <div>
-      <a href="#home">Главная</a>
-      <a href="#about">О компании</a>
-      <a href="#services">Услуги</a>
-      <a href="#cases">Кейсы</a>
-      <a href="#team">Команда</a>
-      <a href="#reviews">Отзывы</a>
-      <a href="#contacts">Контакты</a>
-    </div>
-  </div>
-</nav>
+<div class="wrapper" id="wrapper">
 
-<section id="home" class="hero">
-  <div class="container fade">
-    <span class="tag">Digital marketing agency</span>
-    <h1>Маркетинг, который<br>двигает бизнес вперёд</h1>
+<!-- HERO -->
+<section>
+  <div class="container">
+    <span class="badge">Маркетинговое агентство</span>
+    <h1>Маркетинг и дизайн,<br>которые приносят продажи</h1>
     <p>
-      PRS Agency — команда стратегов, дизайнеров и маркетологов.
-      Мы выстраиваем системный digital-маркетинг, который приводит клиентов,
-      а не просто создаёт активность.
+      PRS Agency — команда маркетологов и дизайнеров.
+      Помогаем бизнесу и маркетплейсам расти за счёт системного SMM,
+      продающих карточек и понятной стратегии.
     </p>
-    <a href="#contacts" class="btn">Бесплатная консультация</a>
+    <a href="https://t.me/prs_business_bot" class="btn">Бесплатная консультация</a>
   </div>
 </section>
 
-<section id="about">
-  <div class="container fade">
+<!-- ABOUT -->
+<section>
+  <div class="container">
     <h2>О компании</h2>
     <p>
-      Мы работаем с B2B и e-commerce проектами, помогая бизнесу расти за счёт
-      стратегии, упаковки и понятной воронки продаж. Никаких шаблонов —
-      только решения под конкретные цели.
+      Мы работаем с малым и средним бизнесом, которому нужен результат,
+      а не красивые отчёты. Фокус — продажи, конверсия и понятная экономика.
+      За счёт оптимизированных процессов мы держим цены ниже рынка,
+      сохраняя качество.
     </p>
   </div>
 </section>
 
-<section id="services">
-  <div class="container fade">
-    <h2>Наши услуги</h2>
+<!-- SERVICES -->
+<section>
+  <div class="container">
+    <h2>Услуги</h2>
     <div class="grid cols-3">
       <div class="card">
-        <h3>SMM под ключ</h3>
-        <p>Стратегия, контент, дизайн и аналитика. Системная работа на результат.</p>
+        <h3>SMM ведение</h3>
+        <p>Стратегия, контент, визуал, аналитика.</p>
+        <div class="old">30 000 – 35 000 ₽</div>
+        <div class="price">17 000 ₽ / мес</div>
       </div>
       <div class="card">
-        <h3>Карточки маркетплейсов</h3>
-        <p>Продающий дизайн, структура и анализ конкурентов.</p>
+        <h3>Карточки товаров</h3>
+        <p>Дизайн под маркетплейсы с фокусом на конверсию.</p>
+        <div class="old">2 000 – 3 000 ₽</div>
+        <div class="price">1 200 ₽ / шт</div>
       </div>
       <div class="card">
-        <h3>Стратегический консалтинг</h3>
-        <p>Разбор воронки, позиционирования и точек роста.</p>
+        <h3>Дизайн постов</h3>
+        <p>Современный визуал для соцсетей.</p>
+        <div class="old">1 000 – 1 500 ₽</div>
+        <div class="price">700 ₽ / шт</div>
+      </div>
+      <div class="card">
+        <h3>Контент-план</h3>
+        <p>Структура публикаций под цели бизнеса.</p>
+        <div class="old">10 000 – 15 000 ₽</div>
+        <div class="price">7 000 ₽ / мес</div>
+      </div>
+      <div class="card">
+        <h3>Консультация</h3>
+        <p>Разбор текущей ситуации и точек роста.</p>
+        <div class="old">7 000 – 10 000 ₽</div>
+        <div class="price">3 500 ₽</div>
+      </div>
+      <div class="card">
+        <h3>Маркетинговый аудит</h3>
+        <p>Глубокий анализ SMM и упаковки.</p>
+        <div class="old">8 000 – 12 000 ₽</div>
+        <div class="price">5 000 ₽</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="cases">
-  <div class="container fade">
-    <h2>Кейсы</h2>
+<!-- CASES -->
+<section>
+  <div class="container">
+    <h2>Портфолио и кейсы</h2>
     <div class="grid cols-3">
       <div class="card">
-        <h3>E-commerce</h3>
-        <p>Рост конверсии карточек и увеличение продаж без роста рекламного бюджета.</p>
+        <h3>Маркетплейс</h3>
+        <p>Рост CTR карточек и увеличение продаж без роста бюджета.</p>
       </div>
       <div class="card">
-        <h3>B2B-услуги</h3>
-        <p>Выстроена воронка и позиционирование, увеличен поток заявок.</p>
+        <h3>B2B услуги</h3>
+        <p>Выстроена воронка и увеличено число заявок.</p>
       </div>
       <div class="card">
-        <h3>Маркетплейсы</h3>
-        <p>Полная переработка упаковки и рост CTR.</p>
+        <h3>Контент + SMM</h3>
+        <p>Системный контент и стабильный поток лидов.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="team">
-  <div class="container fade">
-    <h2>Наша команда</h2>
-    <div class="grid cols-4 team">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x300" alt="">
-        <strong>Strategy Lead</strong>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x300" alt="">
-        <strong>Design Lead</strong>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x300" alt="">
-        <strong>SMM Manager</strong>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x300" alt="">
-        <strong>Analytics</strong>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="reviews">
-  <div class="container fade">
-    <h2>Отзывы клиентов</h2>
-    <div class="grid cols-3">
-      <div class="card review">
-        «Работа с агентством дала понятную стратегию и рост заявок уже в первый месяц.»
-      </div>
-      <div class="card review">
-        «Наконец-то появился системный маркетинг, а не хаотичные действия.»
-      </div>
-      <div class="card review">
-        «Отличное понимание B2B и маркетплейсов.»
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contacts">
-  <div class="container fade">
+<!-- CONTACTS -->
+<section>
+  <div class="container">
     <h2>Контакты</h2>
     <p>
-      Запишитесь на бесплатную консультацию — разберём ваш проект
-      и покажем точки роста.
+      Запишитесь на бесплатную консультацию —
+      разберём ваш проект и покажем точки роста.
     </p>
     <a href="https://t.me/prs_business_bot" class="btn">Связаться в Telegram</a>
   </div>
 </section>
 
-<footer>
-  © PRS Agency. Digital marketing & strategy
-</footer>
+</div>
+
+<div class="nav" id="nav"></div>
 
 <script>
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('show');
-    }
-  });
-},{threshold:0.15});
+const wrapper = document.getElementById('wrapper');
+const sections = document.querySelectorAll('section');
+const nav = document.getElementById('nav');
+let index = 0;
+let locked = false;
 
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+sections.forEach((_,i)=>{
+  const b=document.createElement('button');
+  if(i===0) b.classList.add('active');
+  b.onclick=()=>go(i);
+  nav.appendChild(b);
+});
+
+function go(i){
+  if(i<0||i>=sections.length) return;
+  index=i;
+  wrapper.style.transform=`translateX(-${i*100}vw)`;
+  document.querySelectorAll('.nav button').forEach((b,j)=>{
+    b.classList.toggle('active',j===i);
+  });
+}
+
+window.addEventListener('wheel',e=>{
+  if(locked) return;
+  locked=true;
+  if(e.deltaY>0) go(index+1);
+  else go(index-1);
+  setTimeout(()=>locked=false,700);
+});
 </script>
 
 </body>
